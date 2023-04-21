@@ -9,6 +9,8 @@ node {
     checkout scm
   }
   stage('BUILD'){
+    env.JAVA_HOME = "${jdk}"
+    env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     def mvn = tool 'Default Maven';
     sh "${mvn}/bin/mvn package"
   }
