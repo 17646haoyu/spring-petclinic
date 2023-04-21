@@ -12,9 +12,4 @@ node {
     def mvn = tool 'Default Maven';
     sh "${mvn}/bin/mvn package"
   }
-  post {
-    success {
-      mail to: team@example.com, subject: ‘The Pipeline success :(‘
-    }
-  }
 }
