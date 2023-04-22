@@ -9,9 +9,15 @@ node {
     checkout scm
   }
   stage('BUILD'){
+    jdk = tool name: 'JDK-17'
     env.JAVA_HOME = "${jdk}"
     env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
     def mvn = tool 'Default Maven';
     sh "${mvn}/bin/mvn package"
+  }
+  post{
+    success {
+      ansiblePlaybook installation: 'Ansible', playbook: 'playbook.yml'
+    }
   }
 }
