@@ -1,26 +1,22 @@
 pipeline {
     agent any
     tools { 
-        maven 'Maven 3.3.9' 
+        maven 'Default Maven' 
         jdk 'JDK-17' 
         ansible 'Ansible'
     }
     stages {
         stage ('Initialize') {
             steps {
-                  env.JAVA_HOME = "${jdk}"
-                  env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
                 sh '''
-                    echo "jdk installation path is: ${jdk}"
+                    sh 'java --version'
                 ''' 
             }
         }
 
         stage ('Build') {
-            node {
-                checkout scm 
-            }
             steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[]])
                 sh "${mvn}/bin/mvn package"
             }
             post {
