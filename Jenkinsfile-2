@@ -16,6 +16,6 @@ node {
     sh "${mvn}/bin/mvn package"
   }
   stage('DEPLOY'){
-    ansiblePlaybook installation: 'Ansible', playbook: 'playbook.yml'
+    ansiblePlaybook installation: 'Ansible', playbook: '/usr/share/jenkins/ref/playbook.yml'
   }
 }
