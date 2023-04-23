@@ -15,9 +15,7 @@ node {
     def mvn = tool 'Default Maven';
     sh "${mvn}/bin/mvn package"
   }
-  post{
-    success {
-      ansiblePlaybook installation: 'Ansible', playbook: 'playbook.yml'
-    }
+  stage('DEPLOY'){
+    ansiblePlaybook installation: 'Ansible', playbook: 'playbook.yml'
   }
 }
