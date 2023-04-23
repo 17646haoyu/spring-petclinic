@@ -19,11 +19,12 @@ pipeline {
                 checkout scm
                 sh "mvn package"
             }
-            post {
-                success {
-                    ansiblePlaybook installation: 'Ansible', playbook: '/usr/share/jenkins/ref/playbook.yml'
-                }
-            }
+            
+        }
+    }
+    post {
+        success {
+            ansiblePlaybook installation: 'Ansible', playbook: '/usr/share/jenkins/ref/playbook.yml'
         }
     }
 }
