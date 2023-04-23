@@ -9,7 +9,7 @@ pipeline {
         stage ('Initialize') {
             steps {
                 sh '''
-                    sh 'java --version'
+                    java --version
                 ''' 
             }
         }
